@@ -668,7 +668,7 @@ header {
   -webkit-font-smoothing: antialiased;
   min-height: 76px;
 }
-header h1 {
+header h1 , header h1 a {
   font: 40px/48px "Copse", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #f3f3f3;
   text-shadow: 0px 2px 0px #235796;
