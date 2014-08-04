@@ -2,7 +2,7 @@ name: LapawaDe
 description: ""
 
 markdown: kramdown
-pygments: true
+highlighter: pygments
 
 gems:
  - jekyll-mentions
