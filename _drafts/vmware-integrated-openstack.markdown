@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Delete my vRA items with CloudClient v3.0"
-date:   2014-11-04 12:00:00
+title:  "Introducing VMware Integrated OpenStack VIO"
+date:   2014-11-11 12:00:00
 categories: vmware
 ---
 This short shell script snipped will remove all your services from the vRAs items list.
