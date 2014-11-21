@@ -13,7 +13,7 @@ Thats it.
 
 
 {% highlight bash %}
-cc$ for VMID in $(./cloudclient.sh vra provisioneditem list --format CSV|cut -d, -f1);
+for VMID in $(./cloudclient.sh vra provisioneditem list --format CSV|cut -d, -f1);
 do
   ./cloudclient.sh vra provisioneditem action execute --id "$VMID" --action Destroy;
 done
