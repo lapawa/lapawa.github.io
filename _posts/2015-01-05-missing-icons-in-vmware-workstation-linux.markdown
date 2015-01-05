@@ -5,8 +5,8 @@ date:   2015-01-05 12:00:00
 categories: vmware
 ---
 
-I'm using Xubuntu on several linux boxes and have seen missing icons in the VMware workstation GUI for several times now
-This is quite ugly and makes every task a guess.
+I'm using Xubuntu on several linux boxes and have seen missing icons in the VMware workstation GUI for several times now.
+This is annoying and makes every task a guess.
 ![Missing Icons Screenshot]({{ site.url }}/assets/vmware-workstation-missing-icons.jpg)
 
 The reason lies in a missing *index.theme* file as mentioned in this VMware community thread [[Missing index.theme]][vmwcom-index-theme].

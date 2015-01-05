@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Delete my vRA items with CloudClient v3.0"
+title:  "Delete my vRA items with CloudClient"
 date:   2014-11-04 12:00:00
 categories: vmware
 ---
-This short shell script snipped will remove all your services from the vRAs items list.
+This shell script snipped will remove all your services from the vRAs items list.
 We asume that CloudUtil is able to log in automatically. This can be achieved by setting the 'configuration' as described in my previous post.
 
 
@@ -16,9 +16,14 @@ done
 {% endhighlight %}
 The first command `vra provisioneditems list` receives a list of items owned by the logged in user.
 The second part loops over this list and fires a `Destroy` action on each item.
-Thats it.
 
+That's it.
+
+### Used Versions
+
+ * [VMware vRealize Automation][vra] 6.1 (vRA) formely vCloud Automation Center (vCAC)
+ * [CloudClient][cloudclient-dl] v3.0
 
 [cloudclient-dl]: http://developercenter.vmware.com/web/dp/tool/cloudclient/3.0.0
-[cloudclient-blog]: http://blogs.vmware.com/consulting/tag/cloudclient
+[vra]: http://www.vmware.com/products/vrealize-automation/
 
