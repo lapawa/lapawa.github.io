@@ -18,7 +18,7 @@ zum vRealize Automation unterstützt. Damit ist die VMRC nicht nur für vSphere 
 sondern kann durchaus auch auf den Desktops von Endanwendern landen die keinen direkten Zugang zur virtuellen Infrastruktur haben, sondern ihre virtuellen Server über das Self Service Portal provisionieren.
 
 
-=== Installation
+### Installation
 Schauen wir uns also an, wie die Software sich auf einem Xubuntu 16.04.1LTS schlägt.
 Nach dem Download machen wir das '.bundle' file ausführbar und starten das Skript per sudo
 {% highlight batch %}
@@ -30,7 +30,7 @@ Eventuell verweigert der Installer seinen Dienst mit einer Meldung über nicht a
 ![VMware Installer - unmet dependency]({{site.url}}/assets/2016-09-02_vmrc-installer-failed-dependency.png)
 
 In meinem Fall lag das an einer bereits installierten VMware Workstation 12.1. Die beiden Produkte können offensichtlich nicht gleichzeitig auf dem selben System installiert sein. Was auch wenig Sinn ergibt, da VMware Workstation eine VMRC bereits mitbringt.
-Also deinstallieren wir die Workstation per
+Also deinstallieren wir die Workstation erstmal.
 
 {% highlight bash %}
 vmware-installer  --uninstall-product=vmware-workstation```
@@ -48,16 +48,16 @@ Und die Ausgaben parallel im Logfile verfolgen.
 tail -f /var/log/vmware-installer
 {% endhighlight %}
 
-### Auflistung der VMware Komponenten
+### Auflistung der installierten VMware Komponenten
 Der VMware installer führt sehr genau Buch darüber was bereits auf dem System installiert ist.
-So kann können die Produkte und deren Komponenten aufgelistet werden.
+So kann er die die Produkte und deren Komponenten auflisten.
 {% highlight bash %}
-vmware-installer --list-products
+$ vmware-installer --list-products
 Product Name         Product Version     
 ==================== ====================
 vmware-vmrc          9.0.0.4288332       
 
-vmware-installer --list-components
+$ vmware-installer --list-components
 Component Name       Component Long Name                      Component Version   
 ==================== ======================================== ====================
 vmware-installer     VMware Installer                         2.1.0.4288174       
@@ -68,19 +68,28 @@ vmware-vmrc          VMware Remote Console                    9.0.0.4288332
 {% endhighlight %}
 
 ### Nutzen der VMRC
-Nun kann die VMRC bereits direkt aus dem vSphere Web Client verwendet werden.
-Denn sie wurde als Protokollhandler für URLs die mit vmrc:// beginnen registriert.
+Ist die VMRC erfolgreicht installiert, so kann sie direkt aus dem vSphere Web Client bzw HTML5 Client verwendet werden.
+Denn sie wurde als Protokollhandler für URLs die mit vmrc:// beginnen registriert. Das Verfahren gilt für alle dem freedesktop Standard folgenden Linux Desktop Umgebung und in diesem [Custom URI Handler] Artikel beschrieben.
 Hier ein Beispiel für den Aufruf aus dem HTML5 Client:
 
 
 ```vmrc://clone:cst-VCT-52597724-f4c2-3a6d-a2fb-16692a099ced--tp-76-5B-1B-87-85-C2-5F-5A-A1-21-34-A8-6B-56-82-10-16-53-4F-E5@vcsa.lpw.pri```
 
+William Lam hat vor einiget Zeit auf seinem Blog [VirtuallyGhetto] das Format dieser URLs beschrieben.
 
 Damit stehen für Linux Nutzer gleich zwei Konsolenzugänge zur Verfügung. Zum einen die in den vSphere Web Client integrierte HTML5 Konsole. Sie bietet einen Out-Of-The-Box Zugang zur VM, hat dafür aber eine begrenzte Funktionalität.
 
 Und zum Anderen können wir uns über die 'echte' VMRC freuen und einer VM [MagicSysReq] senden oder sie mit lokalen USB Geräten verbinden.
+Die Verknüpfung zur VMRC wird in dieser Datei ```/usr/share/applications/vmware-vmrc.desktop``` beschrieben.
+
+### Ausblick
+Der Zugriff auf die VMware Konsole per Linux Client ist nun möglich. Eine Sinnvolle Weiterentwicklung des Tools wäre in meinen Augen die Erweiterung um eine Katalogverwaltung  der Verbindungen. So wie man es von anderen Remote Desktop Tools kennt. Durch das URL Schema ließe es sich sogar mit überschaubarem Aufwand in bestehende Tools wie etwa [Remmina] integrieren.
+Dies würde den Zugang zu den 'eigenen' VMs völlig unabhängig von dem vCenter Web Client machen und ein flottes Arbeiten ermöglichen.
 
 [HTML5 Web Client]: https://labs.vmware.com/flings/vsphere-html5-web-client
 [aktuellen VMRC Download]: https://www.vmware.com/go/download-vmrc
 [Release Notes]: http://pubs.vmware.com/Release_Notes/en/vmrc/90/vmrc-90-release-notes.html
 [MagicSysReq]: https://www.kernel.org/doc/Documentation/sysrq.txt
+[VirtuallyGhetto]: http://www.virtuallyghetto.com/2014/10/standalone-vmrc-vm-remote-console-re-introduced-in-vsphere-5-5-update-2b.html
+[Custom URI handler]: http://edoceo.com/howto/xfce-custom-uri-handler
+[Remmina]: http://www.remmina.org
