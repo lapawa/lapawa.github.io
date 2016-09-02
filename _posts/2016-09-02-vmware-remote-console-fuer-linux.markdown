@@ -75,7 +75,7 @@ Hier ein Beispiel für den Aufruf aus dem HTML5 Client:
 
 ```vmrc://clone:cst-VCT-52597724-f4c2-3a6d-a2fb-16692a099ced--tp-76-5B-1B-87-85-C2-5F-5A-A1-21-34-A8-6B-56-82-10-16-53-4F-E5@vcsa.lpw.pri```
 
-William Lam hat vor einiget Zeit auf seinem Blog [VirtuallyGhetto] das Format dieser URLs beschrieben.
+William Lam hat vor einiger Zeit auf seinem Blog [VirtuallyGhetto] das Format dieser URL beschrieben.
 
 Damit stehen für Linux Nutzer gleich zwei Konsolenzugänge zur Verfügung. Zum einen die in den vSphere Web Client integrierte HTML5 Konsole. Sie bietet einen Out-Of-The-Box Zugang zur VM, hat dafür aber eine begrenzte Funktionalität.
 
