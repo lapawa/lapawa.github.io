@@ -68,22 +68,20 @@ vmware-vmrc          VMware Remote Console                    9.0.0.4288332
 {% endhighlight %}
 
 ### Nutzen der VMRC
-Ist die VMRC erfolgreicht installiert, so kann sie direkt aus dem vSphere Web Client bzw HTML5 Client verwendet werden.
-Denn sie wurde als Protokollhandler für URLs die mit vmrc:// beginnen registriert. Das Verfahren gilt für alle dem freedesktop Standard folgenden Linux Desktop Umgebung und in diesem [Custom URI Handler] Artikel beschrieben.
-Hier ein Beispiel für den Aufruf aus dem HTML5 Client:
+Ist die VMRC erfolgreich installiert, so kann sie direkt aus dem vSphere Web Client bzw HTML5 Client verwendet werden.
+Denn sie wurde als Protokollhandler für alle URLs die mit vmrc:// beginnen registriert. Das Verfahren gilt für alle dem Freedesktop Standard folgenden Linux Desktop Umgebungen und ist in diesem [Custom URI Handler] Artikel beschrieben. Die Verknüpfung zwischen Protokoll und VMRC wird in dieser Datei ```/usr/share/applications/vmware-vmrc.desktop``` beschrieben.
+Hier eine Beispiel URL für den Aufruf aus dem HTML5 Client:
 
-
-```vmrc://clone:cst-VCT-52597724-f4c2-3a6d-a2fb-16692a099ced--tp-76-5B-1B-87-85-C2-5F-5A-A1-21-34-A8-6B-56-82-10-16-53-4F-E5@vcsa.lpw.pri```
+```vmrc://clone:cst-VCT-52597724-f4c2-3a6d-a2fb-16692a099ced--tp-76-5B-1B-87-85-C2-5F-5A-A1-21-34-A8-6B-56-82-10-16-53-4F-E5@vcsa.lpw.pri/?moid=vm-57```
 
 William Lam hat vor einiger Zeit auf seinem Blog [VirtuallyGhetto] das Format dieser URL beschrieben.
 
 Damit stehen für Linux Nutzer gleich zwei Konsolenzugänge zur Verfügung. Zum einen die in den vSphere Web Client integrierte HTML5 Konsole. Sie bietet einen Out-Of-The-Box Zugang zur VM, hat dafür aber eine begrenzte Funktionalität.
 
-Und zum Anderen können wir uns über die 'echte' VMRC freuen und einer VM [MagicSysReq] senden oder sie mit lokalen USB Geräten verbinden.
-Die Verknüpfung zur VMRC wird in dieser Datei ```/usr/share/applications/vmware-vmrc.desktop``` beschrieben.
+Und zum Anderen können wir uns über die 'echte' VMRC freuen und einer VM z.B. einen [MagicSysReq] senden oder sie mit lokalen USB Geräten verbinden.
 
 ### Ausblick
-Der Zugriff auf die VMware Konsole per Linux Client ist nun möglich. Eine Sinnvolle Weiterentwicklung des Tools wäre in meinen Augen die Erweiterung um eine Katalogverwaltung  der Verbindungen. So wie man es von anderen Remote Desktop Tools kennt. Durch das URL Schema ließe es sich sogar mit überschaubarem Aufwand in bestehende Tools wie etwa [Remmina] integrieren.
+Der Zugriff auf die VMware Konsole per Linux Client ist nun möglich. Eine sinnvolle Weiterentwicklung des Tools wäre in meinen Augen die Erweiterung um eine Katalogverwaltung der Verbindungen. So wie man es von anderen Remote Desktop Tools kennt. Durch das URL Schema ließe es sich sogar mit überschaubarem Aufwand in bestehende Tools wie etwa [Remmina] integrieren.
 Dies würde den Zugang zu den 'eigenen' VMs völlig unabhängig von dem vCenter Web Client machen und ein flottes Arbeiten ermöglichen.
 
 [HTML5 Web Client]: https://labs.vmware.com/flings/vsphere-html5-web-client
