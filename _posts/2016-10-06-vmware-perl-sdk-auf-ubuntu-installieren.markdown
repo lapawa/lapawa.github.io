@@ -7,17 +7,20 @@ categories: linux vmware
 
 Das VMware Perl SDK prüft vor der Installation ob benötigte Perl Module auf dem System vorhanden sind. Ist dies nicht
 der Fall, werden sie per [CPAN] nachinstalliert. Und dies obwohl das Package Repository von Ubuntu die notwendigen Perl
-Module bereits als .deb Pakete vorhällt. Ein Paket von der Distribution sollte jedoch einer CPAN Installation vorgezogen
+Module bereits als .deb Pakete vorhält. Ein Paket von der Distribution sollte jedoch einer CPAN Installation vorgezogen
 werden. 
 Mit dieser Anleitung werden wir das umsetzen und das System mit den notwendigen Paketen präparieren,
 so dass der VMware Installer keine Abhängigkeiten auflöst und nur das Perl SDK selbst installiert.
 
 ### Perl SDK von VMware
 Worum geht es überhaupt. VMware stellt zur Nutzung der [vSphere] API von [vCenter Server] und [ESXi] das Perl SDK
-kostenlos zur Verfügung. Darin enthalten sind neben den Perl Modulen für eigene Skripte auch die Remote CLI Kommandos
-*vicli-\**.
+kostenlos zur Verfügung. Darin enthalten sind neben den Perl Modulen für eigene Skripte auch die Remote CLI [vcli]
+Kommandos.
 D.h. eine Installation lohnt sich auch dann, wenn keine eigenen Perl Skripte geschrieben werden sollen, dafür aber
-die Konfiguration der vSphere Umgebung per CLI geschehen soll. Alternativ bietet sich dafür aber auch die [VMware VIMA] an.
+die Konfiguration der vSphere Umgebung per CLI geschehen soll. Alternativ bietet sich dafür aber auch die [VMware VIMA]
+an. Darin ist die vcli bereits installiert.
+
+### Download
 Die Einstiegsseite zum Perl SDK befindet sich auf der Entwickler Seite von VMware dem [Developer Center].
 Dort findet man die [Release Notes] und einen Link zum Download per [my vmware]. 
 Für diesen Artikel wurde das 64Bit Perl SDK in der Version 6.0.2 \[3561779\] verwendet.
@@ -31,7 +34,7 @@ Das Installationsskript befindet sich nun hier: *vmware-vsphere-cli-distrib/vmwa
 Bevor wir es als *root* starten werden wir das Linux System noch vorbereiten.
 
 ### Auflösen der Abhängigkeiten
-Per *apt* werde zunächst eine Reihe Perl Module installiert.
+Per *apt* werden zunächst eine ganze Reihe an Perl Module installiert.
 {% highlight bash %}
 root@tuxedo:~# apt install perl-doc libssl-dev libdevel-stacktrace-perl libclass-data-inheritable-perl
 libcrypt-openssl-rsa-perl libcrypt-x509-perl libexception-class-perl libpath-class-perl libtry-tiny-perl
@@ -41,7 +44,7 @@ libxml-namespacesupport-perl libxml-libxml-perl libmodule-build-perl libnet-inet
 
 ### Die Details
 Wer es genau wissen will, sollte einen Blick in das Installerskript *vmware-install.pl* werfen.
-Dort sind verschiedene Perl Array definiert, die die Abhängigkeiten Auflisten. Z.B. *my \@modules* liefert alle
+Dort sind verschiedene Perl Array definiert, die die Abhängigkeiten Auflisten. Z.B. *my modules* liefert alle
 Perl Module mit einer mindest Version. Besonders störend sind jedoch die Einträge im Array *my @module_to_verify*
 denn die hier enthaltenen Module müssen exakt in der Version übereinstimmen.
 {% highlight perl %}
@@ -59,7 +62,7 @@ root@tuxedo:~# perl -e 'use ExtUtils::MakeMaker; print "$ExtUtils::MakeMaker::VE
 {% endhighlight %}
 dass Version 7.0401 bereits auf dem System vorhanden ist. Dies kommt aus dem Ubuntu perl core Paket [perl-modules-5.22].
 Der Installer verlang jedoch nach Version 6.96.
-Diese Restriktionen lassen sich nicht auflösen. Daher werden wir den Installer Patchen und damit die Einträge
+Diese Restriktionen lassen sich nicht auflösen. Daher werden wir den Installer Patchen, die Einträge
 auskommentieren und die Abhängigkeiten aufweichen.
 {% highlight patch %}
 2466,2469c2466,2469
@@ -77,7 +80,7 @@ auskommentieren und die Abhängigkeiten aufweichen.
 ### Eine Ausnahme bleibt
 
 Das Perl Modul *UUID::Random* ist winzig, aber leider nicht als Debian Paket vorhanden.
-Daher werden wir uns ein Paket bauen lassen. Dazu benötigen wir weitere Tools die wir nach dem Ablauf wieder entfernen
+Wir bauen es uns kurzerhand selbst. Dazu benötigen wir weitere Tools die wir nach dem Ablauf wieder entfernen
 können.
 {% highlight bash %}
 root@tuxedo:~# apt install -y dh-make-perl build-essential
@@ -118,4 +121,5 @@ gut als Vorlage für eigene Umsetzungen dienen können.
 [perl-modules-5.22]: http://packages.ubuntu.com/xenial/all/perl-modules-5.22/filelist
 [Release Notes]: http://pubs.vmware.com/Release_Notes/en/viperl/60/vsp602_vsperl_relnotes.html
 [vghetto-scripts]: https://github.com/lamw/vghetto-scripts/tree/master/perl
+[vcli]: https://www.vmware.com/support/developer/vcli/
 [vcli doc]: http://pubs.vmware.com/vsphere-60/topic/com.vmware.vcli.ref.doc/vcli-right.html
