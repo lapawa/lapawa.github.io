@@ -4,7 +4,7 @@ description: ""
 markdown: kramdown
 highlighter: rouge
 
-gems:
+plugins:
  - jekyll-mentions
 
 defaults:
