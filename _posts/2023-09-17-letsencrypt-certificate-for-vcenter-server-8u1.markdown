@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Let's Encrypt certifcate in vCenter Server 8 Update 1"
-date:   2023-09-20 12:00:00
+date:   2023-09-17 12:00:00
 categories: vmware vcenter certifcate letsencrypt
 ---
 After setting up a fresh VMware vCenter Server the vSphere Client and the web services like SOAP and REST APIs are served by a self signed TLS/SSL certificate which was generate by the installer. This makes their consumption cumbersome for every client application. The certificate must be accepted manually as the signing root authority is not know to the client application. The [chain of trust][chain-of-trust] is broken.
