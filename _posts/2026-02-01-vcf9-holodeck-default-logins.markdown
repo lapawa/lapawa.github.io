@@ -13,6 +13,7 @@ categories: vcf
 | vc-mgmt-a.site-a.vcf.lab      | ssh        | vCenter Server appliance        | root                        |
 | nsx-mgmt-a.site-a.vcf.lab     | https      | NSX Manager web frontend        | admin                       |
 | ops-a.site-a.vcf.lab          | https      | VCF Operations web frontend     | admin                       |
+| opslcm-a.site-a.vcf.lab       | ssh        | Lifecycle Manager appliance     | root                        |
 | sddcmanager-a.site-a.vcf.lab  | https      | VCF SDDC Manager web frontend   | admin                       |
 | sddcmanager-a.site-a.vcf.lab  | ssh        | VCF SDDC Manager appliance      | vcf                         | 
 | auto-a.site-a.vcf.lab         | ssh        | Automation Appliance            | vmware-system-user          |
