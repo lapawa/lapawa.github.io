@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Solving caveats with VMware Cloud Foundation 9 Holodeck"
+title:  "Troubleshooting VMware Cloud Foundation 9 Holodeck DNS settings"
 date:   2026-02-08 12:00:00
 categories: vcf
 ---
@@ -44,7 +44,7 @@ search vcf.lab lab.example.com
 root@holorouter [ ~ ]#
 {% endhighlight %}
 
-The first nameserver 10.1.1.1 is served by a dnsmasq process running on the holorouter itself within a kubernetes pod. It can resolve records for the Holodeck Installation itself from zone vcf.lab.
+The first nameserver 10.1.1.1 is served by a dnsmasq process running on the holorouter itself within a kubernetes pod. It can resolve records for the Holodeck Installation which belong to zone vcf.lab.
 You can get a complete list of records from the kubernetes configmap.
 
 {% highlight bash %}
@@ -56,7 +56,7 @@ All other or foreign queries can be answered by the second nameserver entry 192.
 It depends on the client applications behaviour if the name resolution is functional with this setup. Some clients will ask both nameserver at the same time. Other might use a round-robin algorithm. From my experience it is not deterministic.  
 
 #### Solution
-Lets bring in some hierachy in the DNS server setup. All queries should go to the dnsmasq pod first and will get forwarded network DNS server if the zone is not vcf.lab.
+Lets bring in some hierachy in the DNS server setup. All queries should go to the dnsmasq pod first and will get forwarded to the networks DNS server if the zone is not vcf.lab.
 
 1. Remove the external nameserver record from the appliance setup.
 {% highlight bash %}
